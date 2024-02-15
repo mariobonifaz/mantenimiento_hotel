@@ -24,6 +24,10 @@ const UserModel = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    
+},{
+    tableName: "User",
+    freezeTableName:true
 });
 
 export default UserModel; // Asegúrate de exportar correctamente el modelo aquí
