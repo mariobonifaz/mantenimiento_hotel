@@ -17,7 +17,7 @@ const userService = new UserService_1.UserService(userRepository);
 // Middleware
 app.use(body_parser_1.default.json());
 // Routes
-app.post('/register', (req, res) => (0, UserController_1.registerUser)(req, res, userRepository, userService));
+app.post('/user/register', (req, res) => (0, UserController_1.registerUser)(req, res, userRepository, userService));
 // Start server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

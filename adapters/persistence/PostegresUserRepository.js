@@ -13,19 +13,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgresUserRepository = void 0;
-const UserModel_1 = __importDefault(require("./models/UserModel")); // Asegúrate de importar correctamente UserModel
+const UserModel_1 = __importDefault(require("./models/UserModel"));
+const PasswordService_1 = require("../../core/domain/services/PasswordService");
 class PostgresUserRepository {
     createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // Verifica que estás pasando correctamente los datos del usuario
+                // Encriptar la contraseña antes de almacenarla en la base de datos
+                const hashedPassword = yield PasswordService_1.PasswordService.hashPassword(user.password);
+                // Crear un nuevo usuario en la base de datos
                 const newUser = yield UserModel_1.default.create({
                     firstName: user.firstName,
                     lastName: user.lastName,
                     phone: user.phone,
                     email: user.email,
-                    password: user.password
+                    password: hashedPassword
                 });
+                // Devolver el usuario recién creado
                 return newUser.toJSON();
             }
             catch (error) {

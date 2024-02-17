@@ -10,15 +10,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
+const PasswordService_1 = require("./PasswordService");
 class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
     createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Aquí puedes agregar lógica de validación antes de crear el usuario
-            // Por ejemplo, verificar si el correo electrónico ya está en uso, etc.
-            return yield this.userRepository.createUser(user);
+            // Encriptar la contraseña del usuario antes de almacenarla en la base de datos
+            const hashedPassword = yield PasswordService_1.PasswordService.hashPassword(user.password);
+            const userWithHashedPassword = Object.assign(Object.assign({}, user), { password: hashedPassword });
+            yield this.userRepository.createUser(userWithHashedPassword);
         });
     }
 }

@@ -16,7 +16,7 @@ const userService = new UserService(userRepository);
 app.use(bodyParser.json());
 
 // Routes
-app.post('/register', (req, res) => registerUser(req, res, userRepository, userService));
+app.post('/user/register', (req, res) => registerUser(req, res, userRepository, userService));
 
 // Start server
 app.listen(PORT, () => {

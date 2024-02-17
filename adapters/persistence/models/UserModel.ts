@@ -25,5 +25,12 @@ const UserModel = sequelize.define('User', {
         allowNull: false,
     },
 });
+UserModel.sync()
+  .then(() => {
+    console.log('Tabla de usuarios creada correctamente.');
+  })
+  .catch(error => {
+    console.error('Error al crear la tabla de usuarios:', error);
+  })
 
 export default UserModel; // Asegúrate de exportar correctamente el modelo aquí
