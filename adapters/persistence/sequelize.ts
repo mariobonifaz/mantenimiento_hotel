@@ -1,7 +1,7 @@
 // adapters/persistence/sequelize.ts
 import { Sequelize } from 'sequelize';
 
-export const sequelize = new Sequelize('hex_demo', 'postgres', '040902', {
+export const sequelize = new Sequelize('hex_demo', 'postgres', '', {
     host: 'localhost',
     dialect: 'postgres',
 });
