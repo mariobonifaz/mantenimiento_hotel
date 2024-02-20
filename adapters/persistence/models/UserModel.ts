@@ -24,6 +24,10 @@ const UserModel = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    
+},{
+    tableName: "User",
+    freezeTableName:true
 });
 UserModel.sync()
   .then(() => {

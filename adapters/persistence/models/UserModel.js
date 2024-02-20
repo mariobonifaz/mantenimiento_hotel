@@ -25,6 +25,9 @@ const UserModel = sequelize_2.sequelize.define('User', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+}, {
+    tableName: "User",
+    freezeTableName: true
 });
 UserModel.sync()
     .then(() => {

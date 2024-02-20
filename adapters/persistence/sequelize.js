@@ -5,6 +5,7 @@ exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
 exports.sequelize = new sequelize_1.Sequelize('hex_demo', 'postgres', '040902', {
     host: 'localhost',
+    port: 5432,
     dialect: 'postgres',
 });
 exports.sequelize.authenticate()
