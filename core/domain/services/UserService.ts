@@ -47,4 +47,12 @@ export class UserService {
             throw new Error(`Error deleting user: ${(error as Error).message}`);
         }
     }
+
+    async getAllUsers(): Promise<User[]> {
+        try {
+            return await this.userRepository.getAll();
+        } catch (error) {
+            throw new Error(`Error getting all users: ${(error as Error).message}`);
+        }
+    }
 }

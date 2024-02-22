@@ -57,5 +57,15 @@ class UserService {
             }
         });
     }
+    getAllUsers() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.userRepository.getAll();
+            }
+            catch (error) {
+                throw new Error(`Error getting all users: ${error.message}`);
+            }
+        });
+    }
 }
 exports.UserService = UserService;

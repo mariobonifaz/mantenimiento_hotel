@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.registerUser = void 0;
+exports.getAllUsers = exports.deleteUser = exports.updateUser = exports.registerUser = void 0;
 const registerUser = (req, res, userRepository, userService) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newUser = yield userService.createUser(req.body);
@@ -59,3 +59,18 @@ const deleteUser = (req, res, userRepository, userService) => __awaiter(void 0, 
     }
 });
 exports.deleteUser = deleteUser;
+const getAllUsers = (req, res, userRepository, userService) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allUsers = yield userService.getAllUsers();
+        res.status(200).json(allUsers);
+    }
+    catch (err) {
+        if (err instanceof Error) {
+            res.status(500).json({ error: err.message });
+        }
+        else {
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+});
+exports.getAllUsers = getAllUsers;

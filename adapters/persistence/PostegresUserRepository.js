@@ -83,5 +83,16 @@ class PostgresUserRepository {
             }
         });
     }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const users = yield UserModel_1.default.findAll();
+                return users.map(user => user.toJSON());
+            }
+            catch (error) {
+                throw new Error(`Error getting all users: ${error.message}`);
+            }
+        });
+    }
 }
 exports.PostgresUserRepository = PostgresUserRepository;

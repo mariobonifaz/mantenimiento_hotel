@@ -45,3 +45,16 @@ export const deleteUser = async (req: Request, res: Response, userRepository: Us
         }
     }
 };
+
+export const getAllUsers = async (req: Request, res: Response, userRepository: UserRepository, userService: UserService) => {
+    try {
+        const allUsers = await userService.getAllUsers();
+        res.status(200).json(allUsers);
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(500).json({ error: err.message });
+        } else {
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+};
