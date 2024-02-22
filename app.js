@@ -18,6 +18,7 @@ const userService = new UserService_1.UserService(userRepository);
 app.use(body_parser_1.default.json());
 // Routes
 app.post('/user/register', (req, res) => (0, UserController_1.registerUser)(req, res, userRepository, userService));
+app.put('/user/:id', (req, res) => (0, UserController_1.updateUser)(req, res, userRepository, userService)); // Agrega la ruta para actualizar un usuario
 // Start server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

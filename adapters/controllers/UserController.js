@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerUser = void 0;
+exports.updateUser = exports.registerUser = void 0;
 const registerUser = (req, res, userRepository, userService) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newUser = yield userService.createUser(req.body);
@@ -26,3 +26,20 @@ const registerUser = (req, res, userRepository, userService) => __awaiter(void 0
     }
 });
 exports.registerUser = registerUser;
+const updateUser = (req, res, userRepository, userService) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id; // Suponiendo que el id del usuario está en los parámetros de la solicitud
+        const updatedUser = yield userService.updateUser(userId, req.body); // Llama al método de actualización del servicio de usuarios
+        res.status(200).json(updatedUser);
+    }
+    catch (err) {
+        if (err instanceof Error) {
+            res.status(400).json({ error: err.message });
+        }
+        else {
+            // Manejar otros tipos de errores aquí
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+});
+exports.updateUser = updateUser;

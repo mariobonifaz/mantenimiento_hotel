@@ -23,5 +23,25 @@ class UserService {
             yield this.userRepository.createUser(userWithHashedPassword);
         });
     }
+    updateUser(userId, userData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // Primero, obtenemos el usuario que queremos actualizar
+                const existingUser = yield this.userRepository.findById(userId);
+                // Si el usuario no existe, lanzamos un error
+                if (!existingUser) {
+                    throw new Error('User not found');
+                }
+                // Actualizamos los campos proporcionados en userData
+                Object.assign(existingUser, userData);
+                // Guardamos los cambios en la base de datos
+                const updatedUser = yield this.userRepository.update(existingUser);
+                return updatedUser;
+            }
+            catch (error) {
+                throw new Error(`Error updating user: ${error.message}`);
+            }
+        });
+    }
 }
 exports.UserService = UserService;

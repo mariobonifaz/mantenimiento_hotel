@@ -13,4 +13,26 @@ export class UserService {
 
         await this.userRepository.createUser(userWithHashedPassword);
     }
+
+    async updateUser(userId: string, userData: Partial<User>): Promise<User> {
+        try {
+            // Primero, obtenemos el usuario que queremos actualizar
+            const existingUser = await this.userRepository.findById(userId);
+
+            // Si el usuario no existe, lanzamos un error
+            if (!existingUser) {
+                throw new Error('User not found');
+            }
+
+            // Actualizamos los campos proporcionados en userData
+            Object.assign(existingUser, userData);
+
+            // Guardamos los cambios en la base de datos
+            const updatedUser = await this.userRepository.update(existingUser);
+
+            return updatedUser;
+        } catch (error) {
+            throw new Error(`Error updating user: ${(error as Error).message}`);
+        }
+    }
 }

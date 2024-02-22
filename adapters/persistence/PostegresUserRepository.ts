@@ -27,4 +27,33 @@ export class PostgresUserRepository implements UserRepository {
             throw new Error(`Error creating user: ${errorMessage}`);
         }
     }
+
+async findById(userId: string): Promise<User | null> {
+        try {
+            const user = await UserModel.findByPk(userId);
+            return user ? user.toJSON() as User : null;
+        } catch (error) {
+            throw new Error(`Error finding user: ${(error as Error).message}`);
+        }
+    }
+
+    async update(user: User): Promise<User> {
+        try {
+            await UserModel.update(
+                {
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    phone: user.phone,
+                    email: user.email,
+                    // Agrega aquí los demás campos que necesites actualizar
+                },
+                {
+                    where: { id: user.id } // Condición de búsqueda
+                }
+            );
+            return user;
+        } catch (error) {
+            throw new Error(`Error updating user: ${(error as Error).message}`);
+        }
+    }
 }
