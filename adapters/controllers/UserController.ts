@@ -31,3 +31,17 @@ export const updateUser = async (req: Request, res: Response, userRepository: Us
         }
     }
 };
+
+export const deleteUser = async (req: Request, res: Response, userRepository: UserRepository, userService: UserService) => {
+    try {
+        const userId = req.params.id;
+        await userService.deleteUser(userId);
+        res.status(204).send(); // No Content
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(400).json({ error: err.message });
+        } else {
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+};

@@ -43,5 +43,19 @@ class UserService {
             }
         });
     }
+    deleteUser(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const existingUser = yield this.userRepository.findById(userId);
+                if (!existingUser) {
+                    throw new Error('User not found');
+                }
+                yield this.userRepository.deleteUser(userId);
+            }
+            catch (error) {
+                throw new Error(`Error deleting user: ${error.message}`);
+            }
+        });
+    }
 }
 exports.UserService = UserService;

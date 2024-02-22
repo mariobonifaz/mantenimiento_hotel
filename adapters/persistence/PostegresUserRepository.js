@@ -69,5 +69,19 @@ class PostgresUserRepository {
             }
         });
     }
+    deleteUser(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield UserModel_1.default.findByPk(userId);
+                if (!user) {
+                    throw new Error('User not found');
+                }
+                yield user.destroy();
+            }
+            catch (error) {
+                throw new Error(`Error deleting user: ${error.message}`);
+            }
+        });
+    }
 }
 exports.PostgresUserRepository = PostgresUserRepository;

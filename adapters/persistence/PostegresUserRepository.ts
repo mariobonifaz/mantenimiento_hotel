@@ -56,4 +56,16 @@ async findById(userId: string): Promise<User | null> {
             throw new Error(`Error updating user: ${(error as Error).message}`);
         }
     }
+
+    async deleteUser(userId: string): Promise<void> {
+        try {
+            const user = await UserModel.findByPk(userId);
+            if (!user) {
+                throw new Error('User not found');
+            }
+            await user.destroy();
+        } catch (error) {
+            throw new Error(`Error deleting user: ${(error as Error).message}`);
+        }
+    }
 }

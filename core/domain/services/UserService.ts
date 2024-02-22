@@ -35,4 +35,16 @@ export class UserService {
             throw new Error(`Error updating user: ${(error as Error).message}`);
         }
     }
+
+    async deleteUser(userId: string): Promise<void> {
+        try {
+            const existingUser = await this.userRepository.findById(userId);
+            if (!existingUser) {
+                throw new Error('User not found');
+            }
+            await this.userRepository.deleteUser(userId);
+        } catch (error) {
+            throw new Error(`Error deleting user: ${(error as Error).message}`);
+        }
+    }
 }

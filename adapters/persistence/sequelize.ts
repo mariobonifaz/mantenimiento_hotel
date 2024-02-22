@@ -1,6 +1,5 @@
 // adapters/persistence/sequelize.ts
 import { Sequelize } from 'sequelize';
-import UserModel from './models/UserModel'
 
 export const sequelize = new Sequelize('hex_demo', 'postgres', 'POSTGRES', {
     host: 'localhost',

@@ -1,7 +1,7 @@
 // app.ts
 import express from "express";
 import bodyParser from 'body-parser';
-import { registerUser,updateUser } from "./adapters/controllers/UserController";
+import { registerUser,updateUser, deleteUser } from "./adapters/controllers/UserController";
 import { PostgresUserRepository } from "./adapters/persistence/PostegresUserRepository";
 import { UserService } from "./core/domain/services/UserService";
 
@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 // Routes
 app.post('/user/register', (req, res) => registerUser(req, res, userRepository, userService));
 app.put('/user/:id', (req, res) => updateUser(req, res, userRepository, userService)); // Agrega la ruta para actualizar un usuario
+app.delete('/user/:id', (req, res) => deleteUser(req, res, userRepository, userService)); // Agrega esta línea
 
 // Start server
 app.listen(PORT, () => {

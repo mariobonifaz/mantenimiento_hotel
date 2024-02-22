@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.registerUser = void 0;
+exports.deleteUser = exports.updateUser = exports.registerUser = void 0;
 const registerUser = (req, res, userRepository, userService) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newUser = yield userService.createUser(req.body);
@@ -43,3 +43,19 @@ const updateUser = (req, res, userRepository, userService) => __awaiter(void 0, 
     }
 });
 exports.updateUser = updateUser;
+const deleteUser = (req, res, userRepository, userService) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        yield userService.deleteUser(userId);
+        res.status(204).send(); // No Content
+    }
+    catch (err) {
+        if (err instanceof Error) {
+            res.status(400).json({ error: err.message });
+        }
+        else {
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+});
+exports.deleteUser = deleteUser;
