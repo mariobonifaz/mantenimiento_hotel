@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgresUserRepository = void 0;
-const UserModel_1 = __importDefault(require("./models/UserModel"));
-const PasswordService_1 = require("../../core/domain/services/PasswordService");
+const UserModel_1 = __importDefault(require("../../domain/entities/UserModel"));
+const PasswordService_1 = require("../../application/services/uses-cases/PasswordService");
 class PostgresUserRepository {
     createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {

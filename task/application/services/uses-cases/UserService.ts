@@ -1,6 +1,6 @@
 // core/domain/services/UserService.ts
-import { User } from '../entities/User';
-import { UserRepository } from '../repositories/UserRepository';
+import { User } from '../../../domain/entities/User';
+import { UserRepository } from '../../../infraestructure/repositories/UserRepository';
 import { PasswordService } from './PasswordService';
 
 export class UserService {

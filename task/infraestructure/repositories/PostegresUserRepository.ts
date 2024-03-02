@@ -1,8 +1,8 @@
 // adapters/persistence/PostgresUserRepository.ts
-import { User } from "../../core/domain/entities/User";
-import { UserRepository } from "../../core/domain/repositories/UserRepository";
-import UserModel from "./models/UserModel";
-import { PasswordService } from "../../core/domain/services/PasswordService";
+import { User } from "../../domain/entities/User";
+import { UserRepository } from "./UserRepository";
+import UserModel from "../../domain/entities/UserModel";
+import { PasswordService } from "../../application/services/uses-cases/PasswordService";
 
 export class PostgresUserRepository implements UserRepository {
     async createUser(user: User): Promise<User> {
